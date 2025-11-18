@@ -1,0 +1,68 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.restraint'
+    compileSdkVersion 36 // 编译SDK版本
+
+    dexOptions {
+        jumboMode true // 启用大Dex模式
+        preDexLibraries true // 预编译依赖库为Dex格式
+    }
+
+    defaultConfig {
+        applicationId "com.restraint"
+        minSdk 29
+        targetSdk 36
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resConfigs "zh-rCN", "hdpi"
+        multiDexEnabled true
+
+        ndk {
+            // noinspection ChromeOsAbiSupport 仅保留64位ARM架构
+            abiFilters "arm64-v8a"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true // 启用代码混淆和压缩
+            shrinkResources true // 启用资源压缩
+            debuggable false // 关闭调试模式
+
+            // 指定混淆规则文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Java编译选项配置
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8 // 源代码兼容Java 8
+        targetCompatibility JavaVersion.VERSION_1_8 // 目标字节码兼容Java 8
+    }
+
+    // App Bundle拆分配置
+    bundle {
+        language {
+            enableSplit = true // 按语言拆分Bundle，用户仅下载对应语言的资源
+        }
+        density {
+            enableSplit = true // 按屏幕密度拆分Bundle，用户仅下载对应分辨率的资源
+        }
+        abi {
+            enableSplit = true // 按CPU架构拆分Bundle，用户仅下载对应架构的代码
+        }
+    }
+}
+
+// 依赖库配置
+dependencies {
+    implementation libs.material // 引入Material Design组件库
+    implementation libs.activity // 引入Activity组件库（处理界面生命周期等）
+    implementation libs.androidx.appcompat // 引入AppCompat库（兼容低版本系统）
+}
