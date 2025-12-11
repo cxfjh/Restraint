@@ -6,13 +6,10 @@ import android.view.View;
 import android.view.WindowManager;
 
 
-/* 全屏透明覆盖层 */
 public class CoverView {
     private View overlayView;
     private final WindowManager windowManager;
     private final Context context;
-
-
     public CoverView(final WindowManager windowManager, final Context context) {
         this.windowManager = windowManager;
         this.context = context;

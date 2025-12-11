@@ -13,7 +13,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 
-/* 锁定手机 */
 @SuppressLint("AccessibilityPolicy")
 public class LockPhone extends AccessibilityService {
     private static final String PREFS_NAME = "LockPrefs"; // 文件名
@@ -28,6 +27,9 @@ public class LockPhone extends AccessibilityService {
     public static LockPhone getInstance() { return instance; } // 获取单例
 
 
+    /**
+     * 创建时初始化
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -35,6 +37,9 @@ public class LockPhone extends AccessibilityService {
     }
 
 
+    /**
+     * 服务连接时恢复锁定状态
+     */
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
@@ -43,6 +48,9 @@ public class LockPhone extends AccessibilityService {
     }
 
 
+    /**
+     * 重启时恢复锁定状态
+     */
     private void restoreLockState() {
         // 重启时恢复锁定状态
         final boolean shouldBeLocked = prefs.getBoolean(KEY_IS_LOCKED, false);
@@ -62,6 +70,10 @@ public class LockPhone extends AccessibilityService {
     }
 
 
+    /**
+     * 配置服务
+     * @param enableLock 是否启用锁定
+     */
     private void configureService(final boolean enableLock) {
         // 监听锁定状态
         final AccessibilityServiceInfo config = new AccessibilityServiceInfo();
@@ -83,6 +95,10 @@ public class LockPhone extends AccessibilityService {
     }
 
 
+    /**
+     * 启用锁定
+     * @param duration 锁定时长（毫秒）
+     */
     public void enableLock(final long duration) {
         // 设置锁定状态
         final long currentTime = System.currentTimeMillis();
@@ -102,6 +118,9 @@ public class LockPhone extends AccessibilityService {
     }
 
 
+    /**
+     * 禁用锁定
+     */
     public void disableLock() {
         // 清除存储的状态
         prefs.edit().putBoolean(KEY_IS_LOCKED, false).remove(KEY_END_TIME).apply();
@@ -114,6 +133,10 @@ public class LockPhone extends AccessibilityService {
     }
 
 
+    /**
+     * 拦截窗口交互事件
+     * @param event 窗口交互事件
+     */
     @Override
     public void onAccessibilityEvent(final AccessibilityEvent event) {
         // 拦截窗口交互事件
@@ -125,14 +148,27 @@ public class LockPhone extends AccessibilityService {
     }
 
 
+    /**
+     * 拦截手势
+     * @param gestureId 手势ID
+     * @return true如果已锁定，false否则
+     */
     @Override
     protected boolean onGesture(final int gestureId) { return isLocked; } // 锁定手势
 
 
+    /**
+     * 拦截物理按键
+     * @param event 物理按键事件
+     * @return true如果已锁定，false否则
+     */
     @Override
     protected boolean onKeyEvent(final KeyEvent event) { return isLocked; } // 锁定物理按键
 
 
+    /**
+     * 忽略中断事件
+     */
     @Override
     public void onInterrupt() {} // 忽略中断事件
 }

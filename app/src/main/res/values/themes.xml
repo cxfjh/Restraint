@@ -1,6 +1,9 @@
 <resources>
-    <style name="Base.Theme.Restraint" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Dome" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
-
-    <style name="Theme.Restraint" parent="Base.Theme.Restraint" />
 </resources>

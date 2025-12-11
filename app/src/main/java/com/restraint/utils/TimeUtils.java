@@ -8,9 +8,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 
-/* 时间差计算工具类 */
 public class TimeUtils {
-    // 中国时区ID
     private static final String CHINA_TIMEZONE_ID = "Asia/Shanghai";
 
 

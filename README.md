@@ -19,9 +19,6 @@
 - 目标SDK版本：36
 - 主要依赖：Material Design、AppCompat
 
-## 更新日志
-[更新日志](docs/CHANGELOG.md)
-
 ## 许可证
 本项目基于 [GPL-3.0 License](https://www.gnu.org/licenses/gpl-3.0.html) 开源。
 

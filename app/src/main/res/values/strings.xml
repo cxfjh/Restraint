@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">自律锁机</string>
-    <string name="look_phone">0⏰自律锁机</string>
-    <string name="start">设置自律时间</string>
+    <string name="app">自律助手</string>
+    <string name="look">0⏰自律助手</string>
+    <string name="title">设置自律结束时间</string>
+    <string name="btn">开始自律</string>
+    <string name="time">选择时间</string>
 </resources>
